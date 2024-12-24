@@ -21,11 +21,11 @@ model actor {
 model address {
   address_id  Int        @id @default(autoincrement())
   address     String
-  address2    String
-  district    String
+  address2    String?
+  district    String?
   city_id     Int
-  postal_code String
-  phone       String
+  postal_code String?
+  phone       String?
   last_update DateTime   @default(now()) @db.Timestamptz(6)
   city        city       @relation(fields: [city_id], references: [city_id])
   customer    customer[]
@@ -162,10 +162,10 @@ model payment {
 
 model rental {
   rental_id    Int       @id @default(autoincrement())
-  rental_date  DateTime  @db.Timestamptz(6)
+  rental_date  DateTime @db.Timestamptz(6)
   inventory_id Int
   customer_id  Int
-  return_date  DateTime  @db.Timestamptz(6)
+  return_date  DateTime? @db.Timestamptz(6)
   staff_id     Int
   last_update  DateTime  @default(now()) @db.Timestamptz(6)
   customer     customer  @relation(fields: [customer_id], references: [customer_id])
