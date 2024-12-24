@@ -39,7 +39,7 @@ git init
 # prisma 스키마로 떙겨온다 -> Supabase의 postgresql에 접근해서 데이터베이스 스키마를 불러온다.
 npx prisma db pull
 
-# prisma/migrations/0_init 디렉터리 생성
+# prisma/migrations/0_init 디렉터리 생성 (숫자는 마이그레이션 순서이기 때문에 지켜줘야 함)
 
 # prisma 스키마 기반 마이그레이션 sql 생성
 npx prisma migrate diff \

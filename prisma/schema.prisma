@@ -21,10 +21,10 @@ model actor {
 model address {
   address_id  Int        @id @default(autoincrement())
   address     String
-  address2    String?
+  address2    String
   district    String
   city_id     Int
-  postal_code String?
+  postal_code String
   phone       String
   last_update DateTime   @default(now()) @db.Timestamptz(6)
   city        city       @relation(fields: [city_id], references: [city_id])
@@ -65,11 +65,11 @@ model customer {
   store_id    Int
   first_name  String
   last_name   String
-  email       String?
+  email       String
   address_id  Int
   activebool  Boolean   @default(true)
   create_date DateTime  @default(dbgenerated("CURRENT_DATE")) @db.Date
-  last_update DateTime? @default(now()) @db.Timestamptz(6)
+  last_update DateTime  @default(now()) @db.Timestamptz(6)
   active      Int?
   address     address   @relation(fields: [address_id], references: [address_id])
   store       store     @relation(fields: [store_id], references: [store_id])
@@ -83,7 +83,7 @@ model customer {
 model film {
   film_id                                      Int                     @id @default(autoincrement())
   title                                        String
-  description                                  String?
+  description                                  String
   release_year                                 Int?
   language_id                                  Int
   original_language_id                         Int?
@@ -91,7 +91,7 @@ model film {
   rental_rate                                  Decimal                 @default(4.99) @db.Decimal(4, 2)
   length                                       Int?                    @db.SmallInt
   replacement_cost                             Decimal                 @default(19.99) @db.Decimal(5, 2)
-  rating                                       mpaa_rating?            @default(G)
+  rating                                       mpaa_rating             @default(G)
   last_update                                  DateTime                @default(now()) @db.Timestamptz(6)
   special_features                             String[]
   fulltext                                     Unsupported("tsvector")
@@ -165,7 +165,7 @@ model rental {
   rental_date  DateTime  @db.Timestamptz(6)
   inventory_id Int
   customer_id  Int
-  return_date  DateTime? @db.Timestamptz(6)
+  return_date  DateTime  @db.Timestamptz(6)
   staff_id     Int
   last_update  DateTime  @default(now()) @db.Timestamptz(6)
   customer     customer  @relation(fields: [customer_id], references: [customer_id])
@@ -181,11 +181,11 @@ model staff {
   first_name  String
   last_name   String
   address_id  Int
-  email       String?
+  email       String
   store_id    Int
   active      Boolean  @default(true)
   username    String
-  password    String?
+  password    String
   last_update DateTime @default(now()) @db.Timestamptz(6)
   picture     Bytes?
   rental      rental[]
